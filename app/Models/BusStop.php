@@ -5,27 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class BusStop extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'password',
-        'phone',
-        'role',
-        'preferred_area',
+        'stop_name',
+        'latitude',
+        'longitude',
+        'address',
+        'area',
         'status',
+        'operating_hours',
     ];
 
     protected $casts = [
-        'role' => 'string',
+        'latitude' => 'decimal:7',
+        'longitude' => 'decimal:7',
         'status' => 'string',
     ];
 
     // العلاقات
+    public function lineStops()
+    {
+        return $this->hasMany(LineStop::class);
+    }
+
     public function chatMessages()
     {
         return $this->hasMany(ChatMessage::class);
