@@ -1,24 +1,20 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\BusLineController;
-use App\Http\Controllers\BusStopController;
-use App\Http\Controllers\LineStopController;
-use App\Http\Controllers\BusScheduleController;
-use App\Http\Controllers\ChatMessageController;
-use App\Http\Controllers\StopImageController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// الصفحة الرئيسية (اختياري)
 Route::get('/', function () {
     return view('welcome');
 });
 
-// مسارات الموارد (Resources) لكل كنترولر
-Route::resource('users', UserController::class);
-Route::resource('bus_lines', BusLineController::class);
-Route::resource('bus_stops', BusStopController::class);
-Route::resource('line_stops', LineStopController::class);
-Route::resource('bus_schedules', BusScheduleController::class);
-Route::resource('chat_messages', ChatMessageController::class);
-Route::resource('stop_images', StopImageController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
