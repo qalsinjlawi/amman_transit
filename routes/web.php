@@ -7,6 +7,7 @@ use App\Http\Controllers\LineStopController;
 use App\Http\Controllers\BusScheduleController;
 use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\StopImageController;
+use App\Http\Controllers\StationController;
 use Illuminate\Support\Facades\Route;
 
 // الصفحة الرئيسية (اختياري)
@@ -51,3 +52,12 @@ Route::get('/line-stops/{lineStop}', [LineStopController::class, 'show'])->name(
 // Stop Images 
 Route::get('/gallery', [StopImageController::class, 'index'])->name('stop_images.index');
 Route::get('/gallery/{stopImage}', [StopImageController::class, 'show'])->name('stop_images.show');
+/*
+|--------------------------------------------------------------------------
+| Stations Routes (New Unified Routes)
+|--------------------------------------------------------------------------
+*/
+// في ملف routes/web.php
+Route::get('/stations', [StationController::class, 'index'])->name('stations.index');
+Route::get('/stations/{station}', [StationController::class, 'show'])->name('stations.show');
+Route::get('/stations/{station}/edit', [StationController::class, 'edit'])->name('stations.edit');
