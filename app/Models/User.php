@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -25,13 +26,21 @@ class User extends Authenticatable
         'status' => 'string',
     ];
 
-    // العلاقات
-    public function chatMessages()
+    // User has many messages (sent by this user)
+    public function messages(): HasMany
     {
-        return $this->hasMany(ChatMessage::class);
+        return $this->hasMany(Message::class);
     }
 
-    public function stopImages()
+    // User belongs to many chat rooms
+    public function chatRooms(): BelongsToMany
+    {
+        return $this->belongsToMany(ChatRoom::class, 'chat_room_users');
+    }
+
+    // Existing relationships
+    
+    public function stopImages(): HasMany
     {
         return $this->hasMany(StopImage::class);
     }

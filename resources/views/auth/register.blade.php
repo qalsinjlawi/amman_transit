@@ -1,52 +1,252 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style="background-color: #F3EEE7;">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Header Section -->
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <a href="/" class="block">
+                        <img src="{{ asset('storage/images/amman.png') }}" alt="Amman Transit" class="w-20 h-20 object-contain mx-auto" />
+                    </a>
+                </div>
+                <h2 class="mt-4 text-3xl font-bold" style="color: #1F594A;">
+                    Create Your Account
+                </h2>
+                <p class="mt-2 text-sm" style="color: #1F594A; opacity: 0.7;">
+                    Join us and start your journey today
+                </p>
+            </div>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <!-- Form Container -->
+            <div class="bg-white rounded-xl shadow-xl p-8 border-t-4" style="border-top-color: #3BB4B4;">
+                <form method="POST" action="{{ route('register') }}" class="space-y-6">
+                    @csrf
+
+                    <!-- Name Field -->
+                    <div class="group">
+                        <label for="name" class="block text-sm font-medium mb-2 transition-colors group-focus-within:text-opacity-100" style="color: #1F594A;">
+                            {{ __('Full Name') }}
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 opacity-50" style="color: #1F594A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                            <input id="name" 
+                                   name="name" 
+                                   type="text" 
+                                   required 
+                                   autofocus 
+                                   autocomplete="name"
+                                   value="{{ old('name') }}"
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                   placeholder="Enter your full name">
+                        </div>
+                        @if ($errors->get('name'))
+                            <div class="mt-2 text-sm" style="color: #dc2626;">
+                                @foreach ($errors->get('name') as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="group">
+                        <label for="email" class="block text-sm font-medium mb-2 transition-colors group-focus-within:text-opacity-100" style="color: #1F594A;">
+                            {{ __('Email Address') }}
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 opacity-50" style="color: #1F594A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                                </svg>
+                            </div>
+                            <input id="email" 
+                                   name="email" 
+                                   type="email" 
+                                   required 
+                                   autocomplete="username"
+                                   value="{{ old('email') }}"
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                   placeholder="Enter your email address">
+                        </div>
+                        @if ($errors->get('email'))
+                            <div class="mt-2 text-sm" style="color: #dc2626;">
+                                @foreach ($errors->get('email') as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="group">
+                        <label for="phone" class="block text-sm font-medium mb-2 transition-colors group-focus-within:text-opacity-100" style="color: #1F594A;">
+                            {{ __('Phone Number') }}
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 opacity-50" style="color: #1F594A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <input id="phone" 
+                                   name="phone" 
+                                   type="tel" 
+                                   required 
+                                   autocomplete="tel"
+                                   value="{{ old('phone') }}"
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                   placeholder="Enter your phone number">
+                        </div>
+                        @if ($errors->get('phone'))
+                            <div class="mt-2 text-sm" style="color: #dc2626;">
+                                @foreach ($errors->get('phone') as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="group">
+                        <label for="password" class="block text-sm font-medium mb-2 transition-colors group-focus-within:text-opacity-100" style="color: #1F594A;">
+                            {{ __('Password') }}
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 opacity-50" style="color: #1F594A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                            <input id="password" 
+                                   name="password" 
+                                   type="password" 
+                                   required 
+                                   autocomplete="new-password"
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-opacity-50 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                   placeholder="Create a secure password">
+                        </div>
+                        @if ($errors->get('password'))
+                            <div class="mt-2 text-sm" style="color: #dc2626;">
+                                @foreach ($errors->get('password') as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="group">
+                        <label for="password_confirmation" class="block text-sm font-medium mb-2 transition-colors group-focus-within:text-opacity-100" style="color: #1F594A;">
+                            {{ __('Confirm Password') }}
+                        </label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 opacity-50" style="color: #1F594A;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <input id="password_confirmation" 
+                                   name="password_confirmation" 
+                                   type="password" 
+                                   required 
+                                   autocomplete="new-password"
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                                   style="focus:ring-color: #3BB4B4;"
+                                   placeholder="Confirm your password">
+                        </div>
+                        @if ($errors->get('password_confirmation'))
+                            <div class="mt-2 text-sm" style="color: #dc2626;">
+                                @foreach ($errors->get('password_confirmation') as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Submit Button and Login Link -->
+                    <div class="space-y-4">
+                        <button type="submit" 
+                                class="w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-200 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-opacity-50 bg-gradient-to-r from-green-800 to-teal-500 hover:from-green-900 hover:to-teal-600 focus:ring-teal-300">
+                            {{ __('Create Account') }}
+                        </button>
+
+                        <div class="text-center">
+                            <p class="text-sm" style="color: #1F594A; opacity: 0.7;">
+                                Already have an account?
+                                <a href="{{ route('login') }}" 
+                                   class="font-medium transition-colors duration-200 hover:underline"
+                                   style="color: #3BB4B4;">
+                                    {{ __('Sign in here') }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center">
+                <p class="text-xs" style="color: #1F594A; opacity: 0.5;">
+                    By creating an account, you agree to our Terms of Service and Privacy Policy
+                </p>
+            </div>
         </div>
+    </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <style>
+        /* Custom CSS variables for consistent theming */
+        :root {
+            --transit-green: #1F594A;
+            --transit-aqua: #3BB4B4;
+            --transit-sand: #F3EEE7;
+        }
+        
+        /* Custom focus styles for better accessibility */
+        input:focus {
+            --tw-ring-color: #3BB4B4 !important;
+            border-color: #3BB4B4 !important;
+            box-shadow: 0 0 0 3px rgba(59, 180, 180, 0.1) !important;
+        }
+        
+        /* Smooth label animations */
+        .group:focus-within label {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 640px) {
+            .max-w-md {
+                max-width: 95%;
+                margin: 0 auto;
+            }
+            
+            .space-y-8 > * + * {
+                margin-top: 1.5rem;
+            }
+            
+            .p-8 {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Improved button accessibility */
+        button:focus-visible {
+            outline: 2px solid #3BB4B4;
+            outline-offset: 2px;
+        }
+        
+        /* Error message styling */
+        .text-red-600 {
+            color: #dc2626;
+        }
+        
+        /* Link hover effects */
+        a:hover {
+            text-decoration-color: #3BB4B4;
+        }
+    </style>
 </x-guest-layout>

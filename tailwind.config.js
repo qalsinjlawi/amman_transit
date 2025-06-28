@@ -9,13 +9,20 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
-        },
+     theme: {
+    extend: {
+      colors: {
+        'transit-green': '#1F594A',
+        'aqua-line': '#3BB4B4',
+        'sandstone-white': '#F3EEE7',
+      },
+      fontFamily: {
+        // Example: Add a custom Arabic-friendly font
+        sans: ['"Tajawal"', 'ui-sans-serif', 'system-ui'],
+      },
     },
-
-    plugins: [forms],
+  },
+  plugins: [],
 };
+
+
