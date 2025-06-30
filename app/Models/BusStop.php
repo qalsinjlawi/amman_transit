@@ -40,4 +40,5 @@ class BusStop extends Model
     {
         return $this->hasMany(StopImage::class);
     }
+    
 }

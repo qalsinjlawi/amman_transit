@@ -9,11 +9,21 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\StopImageController;
 use App\Http\Controllers\StationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 // الصفحة الرئيسية (اختياري)
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('home.contact');
+Route::get('/faq', [HomeController::class, 'faq'])->name('home.faq');
+Route::get('/home/stations', [HomeController::class, 'stations'])->name('home.stations');
+Route::get('/home/lines', [HomeController::class, 'lines'])->name('home.lines');
+Route::get('/home/schedules', [HomeController::class, 'schedules'])->name('home.schedules');
+Route::get('/home/line-stops', [HomeController::class, 'lineStops'])->name('home.lineStops');
+
+Route::post('/api/search', [HomeController::class, 'quickSearch']);
+Route::post('/contact/send', [HomeController::class, 'sendContactMessage'])->name('contact.send');
+
 
 // مسارات الموارد (Resources) لكل كنترولر
 Route::resource('users', UserController::class);
@@ -23,7 +33,9 @@ Route::resource('line_stops', LineStopController::class);
 Route::resource('bus_schedules', BusScheduleController::class);
 Route::resource('chat_messages', ChatMessageController::class);
 Route::resource('stop_images', StopImageController::class);
-
+Route::get('/login', function () {
+    return view('auth.login'); // استبدل باسم العرض المناسب لتسجيل الدخول
+});
 
 /*
 |--------------------------------------------------------------------------
