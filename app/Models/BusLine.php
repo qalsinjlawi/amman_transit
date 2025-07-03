@@ -29,7 +29,7 @@ class BusLine extends Model
     // العلاقات
     public function lineStops()
     {
-        return $this->hasMany(LineStop::class);
+        return $this->hasMany(LineStop::class, 'line_id'); // تعديل لاستخدام 'line_id' بدلاً من 'bus_line_id'
     }
 
     public function schedules()
