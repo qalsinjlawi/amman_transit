@@ -190,7 +190,7 @@
             <!-- Footer -->
             <div class="text-center">
                 <p class="text-xs" style="color: #1F594A; opacity: 0.5;">
-                    By creating an account, you agree to our Terms of Service and Privacy Policy
+                    
                 </p>
             </div>
         </div>
